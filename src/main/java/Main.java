@@ -12,7 +12,7 @@ public class Main {
 
         //Test 1
         Secret.Encrypt(test, (byte)4);
-        Secret.Decrypt(test, (byte)4);
+        Secret.Decrypt(test, (byte)4, false);
 
     }
 
