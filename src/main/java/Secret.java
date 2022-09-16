@@ -1,4 +1,5 @@
 public class Secret {
+    //Secret
 
     private static byte[] characters_byte;
 
@@ -24,10 +25,21 @@ public class Secret {
         return String.valueOf(characters);
     }
 
-    public static String Decrypt(String text, byte key)
+    /**
+     * Decrypt message not from local string
+     * @param text
+     * @param key
+     * @param fromRemote Is the message coming from somewhere? Example: firebase
+     * @return
+     */
+    public static String Decrypt(String text, byte key, boolean fromRemote)
     {
         char[] characters = text.toCharArray();
 
+        if(fromRemote)
+        {
+            characters_byte = text.getBytes();
+        }
 
         for(int i = 0; i < characters_byte.length; i++)
         {
