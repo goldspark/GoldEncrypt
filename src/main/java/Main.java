@@ -10,6 +10,7 @@ public class Main {
     {
         String test = "Hello World";
 
+        //Test
         Secret.Encrypt(test, (byte)4);
         Secret.Decrypt(test, (byte)4);
 
