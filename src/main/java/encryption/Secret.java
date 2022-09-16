@@ -1,9 +1,11 @@
+package encryption;
+
 public class Secret {
-    //Secret
+    //enccyption.Secret
 
     private static byte[] characters_byte;
 
-    public static String Encrypt(String text, byte key)
+    public static String SimpleEncrypt(String text, byte key)
     {
         char[] characters = text.toCharArray();
 
@@ -32,7 +34,7 @@ public class Secret {
      * @param fromRemote Is the message coming from somewhere? Example: firebase
      * @return
      */
-    public static String Decrypt(String text, byte key, boolean fromRemote)
+    public static String SimpleDecrypt(String text, byte key, boolean fromRemote)
     {
         char[] characters = text.toCharArray();
 
