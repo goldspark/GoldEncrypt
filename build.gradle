@@ -9,18 +9,37 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+task checkWin() {
+    println 'Hello';
+}
+
+
+
+jar{
+
+    exclude 'testing/**';
+
+    manifest {
+        attributes 'Main-Class': '';
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it); }
+    }
+
 }
 
 sourceSets{
     main{
         java{
-            srcDir 'src'
-            exclude 'testing/**'
+            srcDir 'src';
         }
     }
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0';
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine';
 }
 
 test {

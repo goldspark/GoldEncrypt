@@ -1,61 +1,49 @@
 package encryption;
 
 public class Secret {
-    //enccyption.Secret
-
-    private static byte[] characters_byte;
-
-    public static String SimpleEncrypt(String text, byte key)
-    {
-        char[] characters = text.toCharArray();
-
-        characters_byte = text.getBytes();
 
 
-        for(int i = 0; i < characters_byte.length; i++)
-        {
-            characters_byte[i] -= (characters_byte.length) - (characters_byte.length / key);
+    public static String SimpleEncrypt(String text, byte key){
+
+
+        StringBuilder builder = new StringBuilder("");
+
+
+        if (text.length() <= 0) {
+            return "";
+        } else {
+
+            int i;
+            for(i = 0; i < text.length(); ++i) {
+                char code = (char) (text.charAt(i) - (text.length() - (text.length() / 2)));
+                builder.append(code);
+            }
+
+            return builder.toString();
         }
-
-        for(int i = 0; i < characters_byte.length; i++)
-        {
-            characters[i] = (char) (characters_byte[i] & 0xFF);
-        }
-
-        System.out.println("Encrypted: " + String.valueOf(characters));
-
-        return String.valueOf(characters);
     }
 
     /**
-     * Decrypt message not from local string
+     * Get decryption from server
      * @param text
      * @param key
-     * @param fromRemote Is the message coming from somewhere? Example: firebase
+     * @param fromRemote Checks if the message is not local and its coming from EXAMPLE FIREBASE
      * @return
      */
-    public static String SimpleDecrypt(String text, byte key, boolean fromRemote)
-    {
-        char[] characters = text.toCharArray();
+    public static String SimpleDecrypt(String text, byte key, boolean fromRemote){
+        StringBuilder builder = new StringBuilder("");
 
-        if(fromRemote)
-        {
-            characters_byte = text.getBytes();
+        if (text.length() <= 0) {
+            return "";
+        } else {
+
+            int i;
+            for(i = 0; i < text.length(); ++i) {
+                char code = (char) (text.charAt(i) + (text.length() - (text.length() / 2)));
+                builder.append(code);
+            }
+
+            return builder.toString();
         }
-
-        for(int i = 0; i < characters_byte.length; i++)
-        {
-            characters_byte[i] += (characters_byte.length) - (characters_byte.length / key);
-        }
-
-        for(int i = 0; i < characters_byte.length; i++)
-        {
-            characters[i] = (char) (characters_byte[i] & 0xFF);
-        }
-
-        System.out.println("Decrypted: " + String.valueOf(characters));
-
-        return String.valueOf(characters);
     }
-
 }
